@@ -9,7 +9,8 @@ import java.time.LocalDate;
 public class BookEntity extends PanacheEntity {
     public String title;
     public String author;
+    public String editor;
     public boolean read;
-    public LocalDate addDate;
-    public LocalDate upDate;
+    public LocalDate releaseDate;
+    public LocalDate readDate;
 }

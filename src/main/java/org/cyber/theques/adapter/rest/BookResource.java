@@ -12,7 +12,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import org.cyber.theques.application.BookService;
 import org.cyber.theques.domain.model.Book;
-import org.cyber.theques.domain.model.NewBook;
 
 import java.net.URI;
 import java.util.List;
@@ -31,10 +30,8 @@ public class BookResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response add(List<NewBook> books, @Context UriInfo uriInfo) {
-        books.forEach((NewBook book) -> {
-            service.add(book);
-        });
+    public Response add(List<Book> books, @Context UriInfo uriInfo) {
+        books.forEach((Book book) -> service.add(book));
 
         URI location =uriInfo.getAbsolutePathBuilder().build();
         return Response.created(location).build();

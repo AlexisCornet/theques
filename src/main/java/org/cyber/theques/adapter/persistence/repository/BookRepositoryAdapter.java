@@ -27,23 +27,24 @@ public class BookRepositoryAdapter implements BookRepository {
     }
 
     private Book toDomain(BookEntity bookEntity) {
-        Book book = new Book();
-        book.title = bookEntity.title;
-        book.author = bookEntity.author;
-        book.read = bookEntity.read;
-        book.addDate = bookEntity.addDate;
-        book.upDate = bookEntity.upDate;
-        return book;
+        return Book.builder(bookEntity.title, bookEntity.author)
+            .editor(bookEntity.editor)
+            .read(bookEntity.read)
+            .releaseDate(bookEntity.releaseDate)
+            .readDate(bookEntity.readDate)
+            .build();
     }
 
-    private BookEntity fromDomain(Book bookDomain) {
-        BookEntity book = new BookEntity();
-        book.title = bookDomain.title;
-        book.author = bookDomain.author;
-        book.read = bookDomain.read;
-        book.addDate = bookDomain.addDate;
-        book.upDate = bookDomain.upDate;
-        return book;
+    private BookEntity fromDomain(Book book) {
+        BookEntity entity = new BookEntity();
+        entity.title = book.getTitle();
+        entity.author = book.getAuthor();
+        entity.editor = book.getEditor();
+        entity.read = book.isRead();
+        entity.releaseDate = book.getReleaseDate();
+        entity.readDate = book.getReadDate();
+
+        return entity;
     }
 
 }

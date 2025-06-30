@@ -1,7 +1,6 @@
 package org.cyber.theques.application;
 
 import org.cyber.theques.domain.model.Book;
-import org.cyber.theques.domain.model.NewBook;
 import org.cyber.theques.domain.port.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,16 +25,16 @@ class BookServiceTest {
     void add_should_saveNewbook() {
         String title = "myBook";
         String author = "The Author";
-        NewBook newBook = new NewBook(title, author);
-        service.add(newBook);
+        Book book = Book.builder(title, author).build();
+        service.add(book);
 
         ArgumentCaptor<Book> captor = ArgumentCaptor.forClass(Book.class);
         Mockito.verify(repository).save(captor.capture());
 
         Book insertedBook=captor.getValue();
-        assertEquals(title, insertedBook.title);
-        assertEquals(author, insertedBook.author);
-        assertFalse(insertedBook.read);
+        assertEquals(title, insertedBook.getTitle());
+        assertEquals(author, insertedBook.getAuthor());
+        assertFalse(insertedBook.isRead());
     }
 
 }

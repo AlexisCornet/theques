@@ -9,8 +9,8 @@ import org.cyber.theques.adapter.persistence.repository.BookRepositoryAdapter;
 import org.cyber.theques.domain.model.Book;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 
 
 @QuarkusTest
@@ -26,7 +26,10 @@ public class BookRepositoryAdapterTest {
         String title = "myBook";
         String author = "The Author";
         boolean read = true;
-        Book book = new Book(title, author, read);
+
+        Book book = Book.builder(title, author)
+            .read(read)
+            .build();
 
         adapter.save(book);
         verify(panacheRepo).persist(any(BookEntity.class));
