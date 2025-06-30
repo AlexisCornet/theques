@@ -1,0 +1,11 @@
+[
+  {
+    "title": "myBook1",
+    "author": "toto1",
+    "read": true
+  },
+  {
+    "title": "myBook2",
+    "author": "toto2"
+  }
+]
