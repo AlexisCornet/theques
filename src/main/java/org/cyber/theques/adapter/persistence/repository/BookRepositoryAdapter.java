@@ -38,9 +38,9 @@ public class BookRepositoryAdapter implements BookRepository {
     private BookEntity fromDomain(Book book) {
         BookEntity entity = new BookEntity();
         entity.title = book.getTitle();
-        entity.author = book.getAuthor();
+        entity.author = book.getCreator();
         entity.editor = book.getEditor();
-        entity.read = book.isRead();
+        entity.read = book.isConsumed();
         entity.releaseDate = book.getReleaseDate();
         entity.readDate = book.getReadDate();
 

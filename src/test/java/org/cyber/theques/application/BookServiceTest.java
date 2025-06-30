@@ -33,8 +33,8 @@ class BookServiceTest {
 
         Book insertedBook=captor.getValue();
         assertEquals(title, insertedBook.getTitle());
-        assertEquals(author, insertedBook.getAuthor());
-        assertFalse(insertedBook.isRead());
+        assertEquals(author, insertedBook.getCreator());
+        assertFalse(insertedBook.isConsumed());
     }
 
 }

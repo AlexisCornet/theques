@@ -8,10 +8,11 @@ import org.cyber.theques.domain.port.BookRepository;
 import java.util.List;
 
 @ApplicationScoped
-public class BookService {
+public class BookService implements MediaService<Book> {
     @Inject
     BookRepository repository;
 
+    @Override
     public List<Book> getAll() {
         return repository.findAll();
     }

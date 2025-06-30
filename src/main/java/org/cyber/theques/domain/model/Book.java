@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import java.time.LocalDate;
 
 @JsonDeserialize(builder = Book.Builder.class)
-public class Book {
+public class Book implements MediaItem {
     private final String title;
     private final String author;
     private final String editor;
@@ -18,9 +18,9 @@ public class Book {
         this.title = builder.title;
         this.author = builder.author;
         this.editor = builder.editor;
-        this.read = builder.read;
+        this.read = builder.consumed;
         this.releaseDate = builder.releaseDate;
-        this.readDate = builder.readDate;
+        this.readDate = builder.consumedDate;
     }
 
     public static Builder builder(String title, String author) {
@@ -31,7 +31,8 @@ public class Book {
         return title;
     }
 
-    public String getAuthor() {
+    @Override
+    public String getCreator() {
         return author;
     }
 
@@ -39,7 +40,8 @@ public class Book {
         return editor;
     }
 
-    public boolean isRead() {
+    @Override
+    public boolean isConsumed() {
         return read;
     }
 
@@ -56,9 +58,9 @@ public class Book {
         private String title;
         private String author;
         private String editor;
-        private boolean read;
+        private boolean consumed;
         private LocalDate releaseDate;
-        private LocalDate readDate;
+        private LocalDate consumedDate;
 
         public Builder() {
         }
@@ -74,7 +76,7 @@ public class Book {
         }
 
         public Builder read(boolean read) {
-            this.read = read;
+            this.consumed = read;
             return this;
         }
 
@@ -84,7 +86,7 @@ public class Book {
         }
 
         public Builder readDate(LocalDate readDate) {
-            this.readDate = readDate;
+            this.consumedDate = readDate;
             return this;
         }
 
