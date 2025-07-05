@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
 
+/**
+ * This class matches with a Book entity.
+ */
 @Entity
 public class BookEntity extends PanacheEntity {
     public String title;

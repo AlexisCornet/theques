@@ -8,6 +8,11 @@ import org.cyber.theques.domain.model.MediaItem;
 
 import java.util.List;
 
+/**
+ * This abstract class exposes generic entry public action points for objects.
+ *
+ * @param <T>
+ */
 public abstract class AbstractMediaResource<T extends MediaItem> {
 
     protected final MediaService<T> service;
@@ -16,6 +21,11 @@ public abstract class AbstractMediaResource<T extends MediaItem> {
         this.service = service;
     }
 
+    /**
+     * Returns List of all <T> objects.
+     *
+     * @return <T> objects in a list
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<T> getAll() {

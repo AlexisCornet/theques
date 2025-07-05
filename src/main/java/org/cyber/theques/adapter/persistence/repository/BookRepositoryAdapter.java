@@ -8,6 +8,7 @@ import org.cyber.theques.domain.model.Book;
 import org.cyber.theques.domain.port.BookRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class BookRepositoryAdapter implements BookRepository {
@@ -20,6 +21,11 @@ public class BookRepositoryAdapter implements BookRepository {
         return panacheRepo.listAll().stream().map(this::toDomain).toList();
     }
 
+    @Override
+    public Optional<Book> findById(Long id) {
+        return panacheRepo.findByIdOptional(id).map(this::toDomain);
+    }
+
     @Transactional
     @Override
     public void save(Book book) {
@@ -28,6 +34,7 @@ public class BookRepositoryAdapter implements BookRepository {
 
     private Book toDomain(BookEntity bookEntity) {
         return Book.builder(bookEntity.title, bookEntity.author)
+            .id(bookEntity.id)
             .editor(bookEntity.editor)
             .read(bookEntity.read)
             .releaseDate(bookEntity.releaseDate)
@@ -37,6 +44,7 @@ public class BookRepositoryAdapter implements BookRepository {
 
     private BookEntity fromDomain(Book book) {
         BookEntity entity = new BookEntity();
+        entity.id = book.getId();
         entity.title = book.getTitle();
         entity.author = book.getCreator();
         entity.editor = book.getEditor();
