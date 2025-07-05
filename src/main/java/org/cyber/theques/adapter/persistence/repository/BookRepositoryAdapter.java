@@ -50,7 +50,7 @@ public class BookRepositoryAdapter implements BookRepository {
         entity.editor = book.getEditor();
         entity.read = book.isConsumed();
         entity.releaseDate = book.getReleaseDate();
-        entity.readDate = book.getReadDate();
+        entity.readDate = book.getConsumedDate();
 
         return entity;
     }

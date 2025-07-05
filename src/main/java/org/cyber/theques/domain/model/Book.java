@@ -24,9 +24,9 @@ public class Book implements MediaItem {
         this.title = builder.title;
         this.author = builder.author;
         this.editor = builder.editor;
-        this.read = builder.consumed;
+        this.read = builder.read;
         this.releaseDate = builder.releaseDate;
-        this.readDate = builder.consumedDate;
+        this.readDate = builder.readDate;
     }
 
     public static Builder builder(String title, String author) {
@@ -82,7 +82,9 @@ public class Book implements MediaItem {
         return releaseDate;
     }
 
-    public LocalDate getReadDate() {
+    @Override
+    @JsonProperty("readDate")
+    public LocalDate getConsumedDate() {
         return readDate;
     }
 
@@ -92,9 +94,9 @@ public class Book implements MediaItem {
         private String title;
         private String author;
         private String editor;
-        private boolean consumed;
+        private boolean read;
         private LocalDate releaseDate;
-        private LocalDate consumedDate;
+        private LocalDate readDate;
 
         public Builder() {
         }
@@ -115,7 +117,7 @@ public class Book implements MediaItem {
         }
 
         public Builder read(boolean read) {
-            this.consumed = read;
+            this.read = read;
             return this;
         }
 
@@ -125,7 +127,7 @@ public class Book implements MediaItem {
         }
 
         public Builder readDate(LocalDate readDate) {
-            this.consumedDate = readDate;
+            this.readDate = readDate;
             return this;
         }
 

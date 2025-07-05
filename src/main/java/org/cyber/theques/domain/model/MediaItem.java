@@ -34,4 +34,10 @@ public interface MediaItem {
      */
     boolean isConsumed();
 
+    /**
+     * Return the date the media had been consumed.
+     *
+     * @return the consumed date
+     */
+    LocalDate getConsumedDate();
 }
