@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * This class matches with a Book object.
@@ -14,7 +15,7 @@ public class Book implements MediaItem {
     private final Long id;
     private final String title;
     private final String author;
-    private final String editor;
+    private final String publisher;
     private final boolean read;
     private final LocalDate releaseDate;
     private final LocalDate readDate;
@@ -23,10 +24,38 @@ public class Book implements MediaItem {
         this.id = builder.id;
         this.title = builder.title;
         this.author = builder.author;
-        this.editor = builder.editor;
+        this.publisher = builder.publisher;
         this.read = builder.read;
         this.releaseDate = builder.releaseDate;
         this.readDate = builder.readDate;
+    }
+
+    /**
+     * Copies a book, keeping title & author.
+     *
+     * @return copy of the initial book with only default values
+     */
+    public Book copyBook() {
+        return this.copyBuilder()
+            .build();
+    }
+
+    /**
+     * Copies a book, keeping title & author.
+     *
+     * @param publisher   new publisher
+     * @param releaseDate new release date
+     * @param read        new reading statement
+     * @param readDate    new reading date
+     * @return copy of the initial book with new values
+     */
+    public Book copyBook(String publisher, LocalDate releaseDate, boolean read, LocalDate readDate) {
+        return this.copyBuilder()
+            .publisher(publisher)
+            .releaseDate(releaseDate)
+            .read(read)
+            .readDate(read ? Optional.ofNullable(readDate).orElse(LocalDate.now()) : null)
+            .build();
     }
 
     public static Builder builder(String title, String author) {
@@ -35,24 +64,7 @@ public class Book implements MediaItem {
 
     public Builder copyBuilder() {
         return new Builder(this.title, this.author)
-            .id(this.id)
-            .editor(this.editor)
-            .releaseDate(this.releaseDate)
-            .read(this.read)
-            .readDate(this.readDate);
-    }
-
-    /**
-     * Updates the Book to put it at read.
-     *
-     * @param readDate when the book had been read
-     * @return a Book object with read & readDate updated
-     */
-    public Book withRead(LocalDate readDate) {
-        return this.copyBuilder()
-            .read(true)
-            .readDate(readDate)
-            .build();
+            .id(null);
     }
 
     public Long getId() {
@@ -68,8 +80,8 @@ public class Book implements MediaItem {
         return author;
     }
 
-    public String getEditor() {
-        return editor;
+    public String getPublisher() {
+        return publisher;
     }
 
     @Override
@@ -90,12 +102,19 @@ public class Book implements MediaItem {
 
     @JsonPOJOBuilder(withPrefix = "")
     public static class Builder {
+        @JsonProperty("id")
         private Long id;
+        @JsonProperty("title")
         private String title;
+        @JsonProperty("author")
         private String author;
-        private String editor;
+        @JsonProperty("publisher")
+        private String publisher;
+        @JsonProperty("read")
         private boolean read;
+        @JsonProperty("releaseDate")
         private LocalDate releaseDate;
+        @JsonProperty("readDate")
         private LocalDate readDate;
 
         public Builder() {
@@ -111,8 +130,8 @@ public class Book implements MediaItem {
             return this;
         }
 
-        public Builder editor(String editor) {
-            this.editor = editor;
+        public Builder publisher(String publisher) {
+            this.publisher = publisher;
             return this;
         }
 

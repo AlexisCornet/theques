@@ -5,10 +5,9 @@ import jakarta.inject.Inject;
 import org.cyber.theques.domain.model.Book;
 import org.cyber.theques.domain.port.BookRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * This service represents all possible actions on a Book.
@@ -34,8 +33,7 @@ public class BookService implements MediaService<Book> {
     }
 
     @Override
-    public void update(Book book) {
-        checkNotNull(book.getId(), "Cannot update a book with no ID");
-        repository.save(book);
+    public void consume(Long id, LocalDate readDate) {
+        repository.consume(id, readDate);
     }
 }

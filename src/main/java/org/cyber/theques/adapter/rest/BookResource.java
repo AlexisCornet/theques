@@ -2,7 +2,6 @@ package org.cyber.theques.adapter.rest;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -19,7 +18,6 @@ import org.cyber.theques.domain.model.Book;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * This class exposes entry public action points for Book objects.
@@ -64,9 +62,7 @@ public class BookResource extends AbstractMediaResource<Book> {
     @Path("/{id}/read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readBook(@PathParam("id") Long id, @QueryParam("readDate") LocalDate readDate) {
-        Book book = service.findById(id).orElseThrow(NotFoundException::new);
-        Book updated = book.withRead(Optional.ofNullable(readDate).orElse(LocalDate.now()));
-        service.update(updated);
-        return Response.ok(updated).build();
+        service.consume(id, readDate);
+        return Response.ok().build();
     }
 }

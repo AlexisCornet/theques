@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class BookEntity extends PanacheEntity {
     public String title;
     public String author;
-    public String editor;
+    public String publisher;
     public boolean read;
     public LocalDate releaseDate;
     public LocalDate readDate;

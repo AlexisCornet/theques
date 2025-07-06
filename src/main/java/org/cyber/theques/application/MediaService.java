@@ -2,6 +2,7 @@ package org.cyber.theques.application;
 
 import org.cyber.theques.domain.model.MediaItem;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,9 +35,10 @@ public interface MediaService<T extends MediaItem> {
     void add(T object);
 
     /**
-     * Updates a single T object.
+     * Consumes a single T object.
      *
-     * @param updatedObject object to update
+     * @param id           object's id to consume
+     * @param consumedDate date on which the object had been consumed
      */
-    void update(T updatedObject);
+    void consume(Long id, LocalDate consumedDate);
 }

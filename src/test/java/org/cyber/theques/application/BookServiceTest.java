@@ -15,10 +15,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -79,16 +77,11 @@ class BookServiceTest {
     }
 
     @Test
-    void update_should_not_save() {
-        assertThrows(NullPointerException.class, () -> service.update(book));
-        verifyNoInteractions(repository);
-    }
-
-    @Test
-    void update_should_save() {
-        Book updatedBook = book.copyBuilder().id(1L).read(true).readDate(LocalDate.of(2025, 7, 5)).build();
-        service.update(updatedBook);
-        verify(repository).save(updatedBook);
+    void consume_should_save() {
+        Long bookId = 1L;
+        LocalDate today = LocalDate.now();
+        service.consume(bookId, today);
+        verify(repository).consume(bookId, today);
     }
 
 }

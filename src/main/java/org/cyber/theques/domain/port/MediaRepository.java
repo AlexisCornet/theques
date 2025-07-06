@@ -1,5 +1,6 @@
 package org.cyber.theques.domain.port;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,5 +26,13 @@ public interface MediaRepository<T> {
      * @param object object to save
      */
     void save(T object);
+
+    /**
+     * Consumes a media based on its id
+     *
+     * @param id          media id
+     * @param consumeDate consumed date
+     */
+    void consume(Long id, LocalDate consumeDate);
 
 }
