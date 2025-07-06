@@ -2,6 +2,7 @@ package org.cyber.theques.adapter.rest;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -62,7 +63,11 @@ public class BookResource extends AbstractMediaResource<Book> {
     @Path("/{id}/read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readBook(@PathParam("id") Long id, @QueryParam("readDate") LocalDate readDate) {
-        service.consume(id, readDate);
-        return Response.ok().build();
+        try {
+            service.consume(id, readDate);
+            return Response.ok().build();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
     }
 }
