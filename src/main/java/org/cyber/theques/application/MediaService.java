@@ -20,22 +20,23 @@ public interface MediaService<T extends MediaItem> {
     List<T> getAll();
 
     /**
-     * Returns Optional of a single T object based on its id.
+     * Returns Optional of a single <T> object based on its id.
      *
      * @param id id of the object
-     * @return a T object
+     * @return a <T> object
      */
     Optional<T> findById(Long id);
 
     /**
-     * Adds a single T object.
+     * Adds a single <T> object.
      *
      * @param object object to add
+     * @return <T> single object inserted in database
      */
-    void add(T object);
+    T add(T object);
 
     /**
-     * Consumes a single T object.
+     * Consumes a single <T> object.
      *
      * @param id           object's id to consume
      * @param consumedDate date on which the object had been consumed

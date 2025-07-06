@@ -30,8 +30,10 @@ public class BookRepositoryAdapter implements BookRepository {
 
     @Transactional
     @Override
-    public void save(Book book) {
-        panacheRepo.persist(fromDomain(book));
+    public Book save(Book book) {
+        BookEntity entity = fromDomain(book);
+        panacheRepo.persist(entity);
+        return toDomain(entity);
     }
 
     @Transactional

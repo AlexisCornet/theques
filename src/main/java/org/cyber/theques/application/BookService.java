@@ -28,8 +28,8 @@ public class BookService implements MediaService<Book> {
     }
 
     @Override
-    public void add(Book book) {
-        repository.save(book);
+    public Book add(Book book) {
+        return repository.save(book);
     }
 
     @Override

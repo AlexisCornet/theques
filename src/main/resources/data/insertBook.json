@@ -7,5 +7,10 @@
   {
     "title": "myBook2",
     "author": "toto2"
+  },
+  {
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "read": true
   }
 ]

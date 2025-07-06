@@ -6,26 +6,27 @@ import java.util.Optional;
 
 public interface MediaRepository<T> {
     /**
-     * Returns the list of all T objects.
+     * Returns the list of all <T> objects.
      *
-     * @return a T object list
+     * @return a <T> object list
      */
     List<T> findAll();
 
     /**
-     * Returns Optional of a single T object based on its id.
+     * Returns Optional of a single <T> object based on its id.
      *
      * @param id id of the object
-     * @return a T object
+     * @return a <T> object
      */
     Optional<T> findById(Long id);
 
     /**
-     * Saves a new T object in the database.
+     * Saves a new <T> object in the database.
      *
      * @param object object to save
+     * @return <T> single object inserted in database
      */
-    void save(T object);
+    T save(T object);
 
     /**
      * Consumes a media based on its id
