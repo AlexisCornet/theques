@@ -3,9 +3,9 @@ package org.cyber.theques.domain.model;
 import java.time.LocalDate;
 
 /**
- * This interface groups all MediaItem based methods.
+ * This interface groups all methods describing a <T> Object.
  */
-public interface MediaItem {
+public interface MediaDescriptor {
     /**
      * Returns the media title.
      *

@@ -1,6 +1,6 @@
 package org.cyber.theques.application;
 
-import org.cyber.theques.domain.model.MediaItem;
+import org.cyber.theques.domain.model.MediaDescriptor;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.Optional;
  *
  * @param <T>
  */
-public interface MediaService<T extends MediaItem> {
+public interface MediaService<T extends MediaDescriptor> {
     /**
      * Returns List of all <T> objects.
      *

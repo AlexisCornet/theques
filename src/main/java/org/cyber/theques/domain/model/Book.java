@@ -11,7 +11,7 @@ import java.util.Optional;
  * This class matches with a Book object.
  */
 @JsonDeserialize(builder = Book.Builder.class)
-public class Book implements MediaItem {
+public class Book implements MediaDescriptor {
     private final Long id;
     private final String title;
     private final String author;

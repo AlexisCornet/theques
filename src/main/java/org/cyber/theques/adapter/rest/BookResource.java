@@ -2,9 +2,13 @@ package org.cyber.theques.adapter.rest;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -13,6 +17,7 @@ import org.cyber.theques.application.BookService;
 import org.cyber.theques.domain.model.Book;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -70,5 +75,24 @@ public class BookResource extends AbstractMediaResource<Book> {
         Book inserted = service.add(copy);
         System.out.println("book copié : " + inserted);
         return Response.status(Response.Status.CREATED).entity(inserted).build();
+    }
+
+    /**
+     * Updates a Book when it is read
+     *
+     * @param id          id of Book to update
+     * @param readDate reading date
+     * @return the response of updating the book
+     */
+    @PATCH
+    @Path("/{id}/read")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response consumeMedia(@PathParam("id") Long id, @QueryParam("readDate") LocalDate readDate) {
+        try {
+            service.consume(id, readDate);
+            return Response.ok().build();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
     }
 }

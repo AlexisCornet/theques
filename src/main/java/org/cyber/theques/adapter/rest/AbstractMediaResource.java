@@ -2,17 +2,13 @@ package org.cyber.theques.adapter.rest;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
-import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import org.cyber.theques.application.MediaService;
-import org.cyber.theques.domain.model.MediaItem;
+import org.cyber.theques.domain.model.MediaDescriptor;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -20,7 +16,7 @@ import java.util.List;
  *
  * @param <T>
  */
-public abstract class AbstractMediaResource<T extends MediaItem> {
+public abstract class AbstractMediaResource<T extends MediaDescriptor> {
 
     protected final MediaService<T> service;
 
@@ -51,24 +47,5 @@ public abstract class AbstractMediaResource<T extends MediaItem> {
     public T findById(@PathParam("id") Long id) {
         return service.findById(id)
             .orElseThrow(NotFoundException::new);
-    }
-
-    /**
-     * Updates a <T> object when it is consumed
-     *
-     * @param id          id of object to update
-     * @param consumeDate consume date
-     * @return the response of updating the book
-     */
-    @PATCH
-    @Path("/{id}/read")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response consumeMedia(@PathParam("id") Long id, @QueryParam("consumeDate") LocalDate consumeDate) {
-        try {
-            service.consume(id, consumeDate);
-            return Response.ok().build();
-        } catch (NotFoundException e) {
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
-        }
     }
 }
