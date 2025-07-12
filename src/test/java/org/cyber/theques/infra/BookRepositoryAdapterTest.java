@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
-public class BookRepositoryAdapterTest {
+class BookRepositoryAdapterTest {
     @Inject
     BookRepositoryAdapter adapter;
 

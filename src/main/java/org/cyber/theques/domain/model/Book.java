@@ -11,13 +11,10 @@ import java.util.Optional;
  * This class matches with a Book object.
  */
 @JsonDeserialize(builder = Book.Builder.class)
-public class Book implements MediaDescriptor {
-    private final Long id;
-    private final String title;
+public class Book extends MediaItem {
     private final String author;
     private final String publisher;
     private final boolean read;
-    private final LocalDate releaseDate;
     private final LocalDate readDate;
 
     private Book(Builder builder) {
@@ -28,6 +25,8 @@ public class Book implements MediaDescriptor {
         this.read = builder.read;
         this.releaseDate = builder.releaseDate;
         this.readDate = builder.readDate;
+        this.score = builder.score;
+        this.favorite = builder.favorite;
     }
 
     /**
@@ -67,15 +66,8 @@ public class Book implements MediaDescriptor {
             .id(null);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
     @Override
+    @JsonProperty("author")
     public String getCreator() {
         return author;
     }
@@ -88,10 +80,6 @@ public class Book implements MediaDescriptor {
     @JsonProperty("read")
     public boolean isConsumed() {
         return read;
-    }
-
-    public LocalDate getReleaseDate() {
-        return releaseDate;
     }
 
     @Override
@@ -116,6 +104,10 @@ public class Book implements MediaDescriptor {
         private LocalDate releaseDate;
         @JsonProperty("readDate")
         private LocalDate readDate;
+        @JsonProperty("score")
+        private double score;
+        @JsonProperty("favorite")
+        private boolean favorite;
 
         public Builder() {
         }
@@ -147,6 +139,16 @@ public class Book implements MediaDescriptor {
 
         public Builder readDate(LocalDate readDate) {
             this.readDate = readDate;
+            return this;
+        }
+
+        public Builder score(double score) {
+            this.score = score;
+            return this;
+        }
+
+        public Builder favorite(boolean favorite) {
+            this.favorite = favorite;
             return this;
         }
 

@@ -16,6 +16,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -84,4 +85,19 @@ class BookServiceTest {
         verify(repository).consume(bookId, today);
     }
 
+    @Test
+    void evaluate_should_evaluateBook() {
+        Long bookId = 2L;
+        int score = 8;
+        service.evaluate(bookId, score);
+        verify(repository, times(1)).evaluate(bookId, score);
+    }
+
+    @Test
+    void like_should_likeBook() {
+        Long bookId = 3L;
+        boolean like = true;
+        service.like(bookId, like);
+        verify(repository, times(1)).like(bookId, like);
+    }
 }

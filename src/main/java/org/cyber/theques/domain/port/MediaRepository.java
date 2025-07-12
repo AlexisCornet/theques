@@ -36,4 +36,19 @@ public interface MediaRepository<T> {
      */
     void consume(Long id, LocalDate consumeDate);
 
+    /**
+     * Evaluates a <T> object.
+     *
+     * @param id    object's id to evaluate
+     * @param score score value
+     */
+    void evaluate(Long id, int score);
+
+    /**
+     * Like a <T> object.
+     *
+     * @param id   object's id to like
+     * @param like like value to apply
+     */
+    void like(Long id, boolean like);
 }

@@ -36,4 +36,14 @@ public class BookService implements MediaService<Book> {
     public void consume(Long id, LocalDate readDate) {
         repository.consume(id, readDate);
     }
+
+    @Override
+    public void evaluate(Long id, int score) {
+        repository.evaluate(id, score);
+    }
+
+    @Override
+    public void like(Long id, boolean like) {
+        repository.like(id, like);
+    }
 }
