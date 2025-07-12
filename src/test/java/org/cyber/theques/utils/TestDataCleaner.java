@@ -6,7 +6,7 @@ import jakarta.transaction.Transactional;
 import org.cyber.theques.adapter.persistence.repository.BookPanacheRepository;
 
 @ApplicationScoped
-class TestDataCleaner {
+public class TestDataCleaner {
 
     @Inject
     BookPanacheRepository panacheRepo;
